@@ -12,7 +12,7 @@ public class InMemoryUserService : IUserService {
         users = new[] {
             new User {
                 ID = 123456,
-                UserName = "Farmand",
+                Username = "Farmand",
                 FirstName = "Kenned",
                 LastName = "Ødegaard",
                 HairColor = "Black",
@@ -26,7 +26,7 @@ public class InMemoryUserService : IUserService {
             },
             new User {
                 ID = 123456,
-                UserName = "Moderjord",
+                Username = "Moderjord",
                 FirstName = "Birgitte",
                 LastName = "Tierney",
                 HairColor = "Brown",
@@ -40,7 +40,7 @@ public class InMemoryUserService : IUserService {
             },
             new User {
                 ID = 123456,
-                UserName = "Sønnike",
+                Username = "Sønnike",
                 FirstName = "Pierre",
                 LastName = "Aubameyang",
                 HairColor = "Black",
@@ -57,7 +57,17 @@ public class InMemoryUserService : IUserService {
 
     public async Task<User> ValidateUser(string userName, string password)
     {
-        User user = users.FirstOrDefault(u => u.UserName.Equals(userName) && u.Password.Equals(password));
+        User user = users.FirstOrDefault(u => u.Username.Equals(userName) && u.Password.Equals(password));
+        if (user != null)
+        {
+            return user;
+        } 
+        throw new Exception("User not found");
+    }
+
+    public async Task<User> ValidateLogin(string username, string password)
+    {
+        User user = users.FirstOrDefault(u => u.Username.Equals(username) && u.Password.Equals(password));
         if (user != null)
         {
             return user;

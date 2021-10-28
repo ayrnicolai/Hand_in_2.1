@@ -28,7 +28,8 @@ namespace Hand_in_2._1.Controllers
                 return Ok(user);
             }
             catch (Exception e)
-            {
+            {                
+                Console.WriteLine(e.Message);
                 return BadRequest(e.Message);
             }
         }
